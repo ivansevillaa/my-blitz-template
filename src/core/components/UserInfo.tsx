@@ -1,6 +1,10 @@
+import Link from "next/link";
+
 import { Routes } from "@blitzjs/next";
 import { useMutation } from "@blitzjs/rpc";
-import Link from "next/link";
+
+import db from "db";
+
 import logout from "src/features/auth/mutations/logout";
 import { useCurrentUser } from "src/features/users/hooks/useCurrentUser";
 
