@@ -1,5 +1,7 @@
-import { ErrorBoundary, AppProps } from "@blitzjs/next";
+import { AppProps, ErrorBoundary } from "@blitzjs/next";
+
 import { withBlitz } from "src/blitz-client";
+
 import RootErrorFallback from "src/core/components/RootErrorFallback";
 import "src/core/styles/globals.css";
 

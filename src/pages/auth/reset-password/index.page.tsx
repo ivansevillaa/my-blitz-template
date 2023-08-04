@@ -1,13 +1,16 @@
-import Layout from "src/core/layouts/Layout";
-import { LabeledTextField } from "src/core/components/LabeledTextField";
-import { Form, FORM_ERROR } from "src/core/components/Form";
-import { ResetPassword } from "src/features/auth/schemas";
-import resetPassword from "src/features/auth/mutations/resetPassword";
-import { BlitzPage, Routes } from "@blitzjs/next";
-import { useRouter } from "next/router";
-import { useMutation } from "@blitzjs/rpc";
 import Link from "next/link";
+import { useRouter } from "next/router";
+
+import { BlitzPage, Routes } from "@blitzjs/next";
+import { useMutation } from "@blitzjs/rpc";
 import { assert } from "blitz";
+
+import { Form, FORM_ERROR } from "src/core/components/Form";
+import { LabeledTextField } from "src/core/components/LabeledTextField";
+import Layout from "src/core/layouts/Layout";
+
+import resetPassword from "src/features/auth/mutations/resetPassword";
+import { ResetPassword } from "src/features/auth/schemas";
 
 const ResetPasswordPage: BlitzPage = () => {
   const router = useRouter();

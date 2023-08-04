@@ -1,5 +1,5 @@
-import { AuthenticationError, AuthorizationError } from "blitz";
 import { ErrorComponent, ErrorFallbackProps } from "@blitzjs/next";
+import { AuthenticationError, AuthorizationError } from "blitz";
 
 export default function RootErrorFallback({ error }: ErrorFallbackProps) {
   if (error instanceof AuthenticationError) {
