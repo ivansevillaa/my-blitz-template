@@ -2,14 +2,14 @@
  * @vitest-environment jsdom
  */
 
-import { expect, vi, test } from "vitest"
-import { render } from "test/utils"
+import { expect, vi, test } from "vitest";
+import { render } from "test/utils";
 
-import Home from "../src/pages/index"
+import Home from "../src/pages/index";
 
 vi.mock("public/logo.png", () => ({
   default: { src: "/logo.png" },
-}))
+}));
 
 test.skip("renders blitz documentation link", () => {
   // This is an example of how to ensure a specific item is in the document
@@ -24,9 +24,9 @@ test.skip("renders blitz documentation link", () => {
       email: "user@email.com",
       role: "user",
     }),
-  }))
+  }));
 
-  const { getByText } = render(<Home />)
-  const linkElement = getByText(/Blitz Docs/i)
-  expect(linkElement).toBeInTheDocument()
-})
+  const { getByText } = render(<Home />);
+  const linkElement = getByText(/Blitz Docs/i);
+  expect(linkElement).toBeInTheDocument();
+});

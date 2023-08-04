@@ -7,6 +7,12 @@
     "start": "blitz start",
     "studio": "blitz prisma studio",
     "lint": "eslint --ignore-path .gitignore --ext .js,.ts,.tsx .",
+    "prettier": "prettier --ignore-path .gitignore \"**/*.+(js|json|ts|tsx)\"",
+    "format": "npm run prettier -- --write",
+    "check-format": "npm run prettier -- --list-different",
+    "check-types": "tsc",
+    "commit-validate": "npm run check-types && npm run check-format && npm run lint",
+    "push-validate": "npm run commit-validate && npm run build",
     "test": "vitest run --passWithNoTests",
     "test:watch": "vitest",
     "prepare": "husky install"
@@ -15,7 +21,6 @@
     "schema": "db/schema.prisma"
   },
   "prettier": {
-    "semi": false,
     "printWidth": 100
   },
   "lint-staged": {
