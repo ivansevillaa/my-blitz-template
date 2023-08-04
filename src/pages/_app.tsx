@@ -1,7 +1,7 @@
 import { ErrorBoundary, AppProps } from "@blitzjs/next";
 import { withBlitz } from "src/blitz-client";
 import RootErrorFallback from "src/core/components/RootErrorFallback";
-import "src/styles/globals.css";
+import "src/core/styles/globals.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const getLayout = Component.getLayout || ((page) => page);
