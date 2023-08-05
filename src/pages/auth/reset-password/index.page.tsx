@@ -7,7 +7,7 @@ import { assert } from "blitz";
 
 import { Form, FORM_ERROR } from "src/core/components/Form";
 import { LabeledTextField } from "src/core/components/LabeledTextField";
-import Layout from "src/core/layouts/Layout";
+import Layout from "src/core/layouts/RootLayout";
 
 import resetPassword from "src/features/auth/mutations/resetPassword";
 import { ResetPassword } from "src/features/auth/schemas";

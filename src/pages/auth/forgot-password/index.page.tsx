@@ -3,7 +3,7 @@ import { useMutation } from "@blitzjs/rpc";
 
 import { Form, FORM_ERROR } from "src/core/components/Form";
 import { LabeledTextField } from "src/core/components/LabeledTextField";
-import Layout from "src/core/layouts/Layout";
+import Layout from "src/core/layouts/RootLayout";
 
 import forgotPassword from "src/features/auth/mutations/forgotPassword";
 import { ForgotPassword } from "src/features/auth/schemas";

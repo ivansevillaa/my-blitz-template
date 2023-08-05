@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 
 import { BlitzPage } from "@blitzjs/next";
 
-import Layout from "src/core/layouts/Layout";
+import Layout from "src/core/layouts/RootLayout";
 
 import LoginForm from "./components/LoginForm";
 
