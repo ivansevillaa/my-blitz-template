@@ -1,4 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Button } from "@mantine/core";
 import { PropsWithoutRef, ReactNode, useState } from "react";
 import { FormProvider, useForm, UseFormProps } from "react-hook-form";
 import { z } from "zod";
@@ -65,16 +66,10 @@ export function Form<S extends z.ZodType<any, any>>({
         )}
 
         {submitText && (
-          <button type="submit" disabled={ctx.formState.isSubmitting}>
+          <Button type="submit" disabled={ctx.formState.isSubmitting}>
             {submitText}
-          </button>
+          </Button>
         )}
-
-        <style global jsx>{`
-          .form > * + * {
-            margin-top: 1rem;
-          }
-        `}</style>
       </form>
     </FormProvider>
   );

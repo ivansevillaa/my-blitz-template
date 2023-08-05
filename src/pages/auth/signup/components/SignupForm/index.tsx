@@ -1,5 +1,7 @@
 import { useMutation } from "@blitzjs/rpc";
 
+import { Title } from "@mantine/core";
+
 import { Form, FORM_ERROR } from "src/core/components/Form";
 import { LabeledTextField } from "src/core/components/LabeledTextField";
 
@@ -14,7 +16,7 @@ export const SignupForm = (props: SignupFormProps) => {
   const [signupMutation] = useMutation(signup);
   return (
     <div>
-      <h1>Create an Account</h1>
+      <Title order={1}>Create an Account</Title>
 
       <Form
         submitText="Create Account"

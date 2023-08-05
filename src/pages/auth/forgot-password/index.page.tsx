@@ -1,6 +1,8 @@
 import { BlitzPage } from "@blitzjs/next";
 import { useMutation } from "@blitzjs/rpc";
 
+import { Text, Title } from "@mantine/core";
+
 import { Form, FORM_ERROR } from "src/core/components/Form";
 import { LabeledTextField } from "src/core/components/LabeledTextField";
 import Layout from "src/core/layouts/RootLayout";
@@ -17,11 +19,11 @@ const ForgotPasswordPage: BlitzPage = () => {
 
       {isSuccess ? (
         <div>
-          <h2>Request Submitted</h2>
-          <p>
+          <Title order={2}>Request Submitted</Title>
+          <Text>
             If your email is in our system, you will receive instructions to reset your password
             shortly.
-          </p>
+          </Text>
         </div>
       ) : (
         <Form

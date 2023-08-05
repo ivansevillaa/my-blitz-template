@@ -5,6 +5,8 @@ import { BlitzPage, Routes } from "@blitzjs/next";
 import { useMutation } from "@blitzjs/rpc";
 import { assert } from "blitz";
 
+import { Text, Title } from "@mantine/core";
+
 import { Form, FORM_ERROR } from "src/core/components/Form";
 import { LabeledTextField } from "src/core/components/LabeledTextField";
 import Layout from "src/core/layouts/RootLayout";
@@ -19,14 +21,14 @@ const ResetPasswordPage: BlitzPage = () => {
 
   return (
     <div>
-      <h1>Set a New Password</h1>
+      <Title order={1}>Set a New Password</Title>
 
       {isSuccess ? (
         <div>
-          <h2>Password Reset Successfully</h2>
-          <p>
+          <Title order={2}>Password Reset Successfully</Title>
+          <Text>
             Go to the <Link href={Routes.Home()}>homepage</Link>
-          </p>
+          </Text>
         </div>
       ) : (
         <Form

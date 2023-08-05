@@ -1,4 +1,5 @@
 import { ErrorMessage } from "@hookform/error-message";
+import { TextInput } from "@mantine/core";
 import { ComponentPropsWithoutRef, forwardRef, PropsWithoutRef } from "react";
 import { useFormContext } from "react-hook-form";
 
@@ -22,10 +23,12 @@ export const LabeledTextField = forwardRef<HTMLInputElement, LabeledTextFieldPro
 
     return (
       <div {...outerProps}>
-        <label {...labelProps}>
-          {label}
-          <input disabled={isSubmitting} {...register(name)} {...props} />
-        </label>
+        <TextInput
+          label={label}
+          labelProps={labelProps}
+          disabled={isSubmitting}
+          {...register(name)}
+        />
 
         <ErrorMessage
           render={({ message }) => (
@@ -36,23 +39,6 @@ export const LabeledTextField = forwardRef<HTMLInputElement, LabeledTextFieldPro
           errors={errors}
           name={name}
         />
-
-        <style jsx>{`
-          label {
-            display: flex;
-            flex-direction: column;
-            align-items: start;
-            font-size: 1rem;
-          }
-          input {
-            font-size: 1rem;
-            padding: 0.25rem 0.5rem;
-            border-radius: 3px;
-            border: 1px solid purple;
-            appearance: none;
-            margin-top: 0.5rem;
-          }
-        `}</style>
       </div>
     );
   }

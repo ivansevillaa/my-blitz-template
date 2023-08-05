@@ -4,6 +4,8 @@ import { Routes } from "@blitzjs/next";
 import { useMutation } from "@blitzjs/rpc";
 import { AuthenticationError, PromiseReturnType } from "blitz";
 
+import { Title } from "@mantine/core";
+
 import { Form, FORM_ERROR } from "src/core/components/Form";
 import { LabeledTextField } from "src/core/components/LabeledTextField";
 
@@ -18,7 +20,7 @@ export const LoginForm = (props: LoginFormProps) => {
   const [loginMutation] = useMutation(login);
   return (
     <div>
-      <h1>Login</h1>
+      <Title order={1}>Login</Title>
 
       <Form
         submitText="Login"
