@@ -1,48 +1,62 @@
 import { BlitzPage } from "@blitzjs/next";
 import { useMutation } from "@blitzjs/rpc";
 
-import { Text, Title } from "@mantine/core";
+import { Button, Container, Text, TextInput, Title } from "@mantine/core";
+import { useForm } from "@mantine/form";
 
-import { Form, FORM_ERROR } from "src/core/components/Form";
-import { LabeledTextField } from "src/core/components/LabeledTextField";
 import Layout from "src/core/layouts/RootLayout";
 
 import forgotPassword from "src/features/auth/mutations/forgotPassword";
-import { ForgotPassword } from "src/features/auth/schemas";
 
 const ForgotPasswordPage: BlitzPage = () => {
   const [forgotPasswordMutation, { isSuccess }] = useMutation(forgotPassword);
 
+  const form = useForm({
+    initialValues: {
+      email: "",
+    },
+
+    validate: {
+      email: (value) => (/^\S+@\S+$/.test(value) ? null : "Invalid email"),
+    },
+  });
+
+  const handleSubmit = async (values) => {
+    try {
+      await forgotPasswordMutation(values);
+    } catch (error: any) {
+      return {
+        errorMessage: "Sorry, we had an unexpected error. Please try again.",
+      };
+    }
+  };
+
   return (
     <Layout title="Forgot Your Password?">
-      <h1>Forgot your password?</h1>
+      <Container>
+        <Title order={1}>Forgot your password?</Title>
 
-      {isSuccess ? (
-        <div>
-          <Title order={2}>Request Submitted</Title>
-          <Text>
-            If your email is in our system, you will receive instructions to reset your password
-            shortly.
-          </Text>
-        </div>
-      ) : (
-        <Form
-          submitText="Send Reset Password Instructions"
-          schema={ForgotPassword}
-          initialValues={{ email: "" }}
-          onSubmit={async (values) => {
-            try {
-              await forgotPasswordMutation(values);
-            } catch (error: any) {
-              return {
-                [FORM_ERROR]: "Sorry, we had an unexpected error. Please try again.",
-              };
-            }
-          }}
-        >
-          <LabeledTextField name="email" label="Email" placeholder="Email" />
-        </Form>
-      )}
+        {isSuccess ? (
+          <>
+            <Title order={2}>Request Submitted</Title>
+            <Text>
+              If your email is in our system, you will receive instructions to reset your password
+              shortly.
+            </Text>
+          </>
+        ) : (
+          <form onSubmit={form.onSubmit(handleSubmit)}>
+            <TextInput
+              name="email"
+              label="Email"
+              placeholder="Email"
+              withAsterisk
+              {...form.getInputProps("email")}
+            />
+            <Button type="submit">Send Reset Password Instructions</Button>
+          </form>
+        )}
+      </Container>
     </Layout>
   );
 };
