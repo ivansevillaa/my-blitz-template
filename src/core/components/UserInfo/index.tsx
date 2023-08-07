@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Routes } from "@blitzjs/next";
 import { useMutation } from "@blitzjs/rpc";
 
-import { Button, Text } from "@mantine/core";
+import { Button, Container, Text } from "@mantine/core";
 
 import logout from "src/features/auth/mutations/logout";
 import { useCurrentUser } from "src/features/users/hooks/useCurrentUser";
@@ -22,14 +22,14 @@ const UserInfo = () => {
         >
           Logout
         </Button>
-        <div>
+        <Container>
           <Text>
             User id: <code>{currentUser.id}</code>
           </Text>
           <Text>
             User role: <code>{currentUser.role}</code>
           </Text>
-        </div>
+        </Container>
       </>
     );
   } else {

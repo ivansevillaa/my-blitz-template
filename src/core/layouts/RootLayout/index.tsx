@@ -1,9 +1,21 @@
 import Head from "next/head";
+import Link from "next/link";
 
-import { BlitzLayout } from "@blitzjs/next";
+import { BlitzLayout, Routes } from "@blitzjs/next";
 
-import { AppShell, Footer, Header, List, Text } from "@mantine/core";
-import React from "react";
+import {
+  Anchor,
+  AppShell,
+  Container,
+  Footer,
+  Group,
+  Header,
+  List,
+  Loader,
+  Stack,
+  Text,
+} from "@mantine/core";
+import React, { Suspense } from "react";
 
 const RootLayout: BlitzLayout<{ title?: string; children?: React.ReactNode }> = ({
   title,
@@ -21,16 +33,22 @@ const RootLayout: BlitzLayout<{ title?: string; children?: React.ReactNode }> = 
       <AppShell
         header={
           <Header height={60}>
-            <Text>Logo</Text>
+            <Group h="100%" p="lg">
+              <Anchor href={Routes.Home()} component={Link} underline={false}>
+                Logo
+              </Anchor>
+            </Group>
           </Header>
         }
         footer={
           <Footer height={120}>
-            <Text>Copyright @ {year}</Text>
+            <Group h="100%" position="center">
+              <Text>Copyright @ {year}</Text>
+            </Group>
           </Footer>
         }
       >
-        {children}
+        <Suspense fallback={<Loader />}>{children}</Suspense>
       </AppShell>
     </>
   );

@@ -4,8 +4,21 @@ import { Routes } from "@blitzjs/next";
 import { useMutation } from "@blitzjs/rpc";
 import { AuthenticationError, PromiseReturnType } from "blitz";
 
-import { Anchor, Button, Container, PasswordInput, Text, TextInput, Title } from "@mantine/core";
+import {
+  Anchor,
+  Button,
+  Divider,
+  Group,
+  Paper,
+  PasswordInput,
+  Stack,
+  Text,
+  TextInput,
+} from "@mantine/core";
+import { TwitterIcon } from "@mantine/ds";
 import { useForm } from "@mantine/form";
+
+import { GoogleIcon } from "src/core/components/SocialIcons/GoogleIcons";
 
 import login from "src/features/auth/mutations/login";
 
@@ -33,42 +46,65 @@ export const LoginForm = (props: LoginFormProps) => {
       props.onSuccess?.(user);
     } catch (error: any) {
       if (error instanceof AuthenticationError) {
-        return { errorMessage: "Sorry, those credentials are invalid" };
+        return { errors: "Sorry, those credentials are invalid" };
       } else {
         return {
-          errorMessage:
-            "Sorry, we had an unexpected error. Please try again. - " + error.toString(),
+          errors: "Sorry, we had an unexpected error. Please try again. - " + error.toString(),
         };
       }
     }
   };
 
   return (
-    <Container>
-      <Title order={1}>Login</Title>
-      <form onSubmit={form.onSubmit(handleSubmit)}>
-        <TextInput
-          name="email"
-          label="Email"
-          placeholder="Email"
-          withAsterisk
-          {...form.getInputProps("email")}
-        />
-        <PasswordInput
-          name="password"
-          label="Password"
-          placeholder="Password"
-          withAsterisk
-          {...form.getInputProps("password")}
-        />
-        <Button type="submit">Login</Button>
-      </form>
-      <Link href={Routes.ForgotPasswordPage()}>Forgot your password?</Link>
-      <Text>Or</Text>
-      <Anchor component={Link} href={Routes.SignupPage()}>
-        Sign Up
-      </Anchor>
-    </Container>
+    <Group h="100%" position="center">
+      <Paper radius="md" p="xl" withBorder>
+        <Text size="lg" weight={500}>
+          Welcome to insert_name, login with
+        </Text>
+        <Group grow mb="md" mt="md">
+          <Button leftIcon={<GoogleIcon />} variant="default" radius="xl">
+            Google
+          </Button>
+          <Button
+            leftIcon={<TwitterIcon size="1rem" color="#00ACEE" />}
+            variant="default"
+            radius="xl"
+          >
+            Twitter
+          </Button>
+        </Group>
+        <Divider label="Or continue with email" labelPosition="center" my="lg" />
+        <form onSubmit={form.onSubmit(handleSubmit)}>
+          <Stack>
+            <TextInput
+              name="email"
+              label="Email"
+              placeholder="Email"
+              radius="md"
+              withAsterisk
+              {...form.getInputProps("email")}
+            />
+            <PasswordInput
+              name="password"
+              label="Password"
+              placeholder="Password"
+              radius="md"
+              withAsterisk
+              {...form.getInputProps("password")}
+            />
+            <Button type="submit">Login</Button>
+          </Stack>
+          <Group position="apart" mt="xl">
+            <Anchor component={Link} color="dimmed" href={Routes.SignupPage()} size="xs">
+              {"Don't have an account? Register"}
+            </Anchor>
+            <Button type="submit" radius="xl">
+              Login
+            </Button>
+          </Group>
+        </form>
+      </Paper>
+    </Group>
   );
 };
 

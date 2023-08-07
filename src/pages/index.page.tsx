@@ -8,9 +8,7 @@ import Layout from "src/core/layouts/RootLayout";
 const Home: BlitzPage = () => {
   return (
     <Layout title="Home">
-      <Suspense fallback="Loading...">
-        <UserInfo />
-      </Suspense>
+      <UserInfo />
     </Layout>
   );
 };
