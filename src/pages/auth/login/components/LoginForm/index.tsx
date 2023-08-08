@@ -20,7 +20,7 @@ import { useForm } from "@mantine/form";
 
 import { GoogleIcon } from "src/core/components/SocialIcons/GoogleIcons";
 
-import login from "src/features/auth/mutations/login";
+import login from "src/pages/auth/mutations/login";
 
 type LoginFormProps = {
   onSuccess?: (user: PromiseReturnType<typeof login>) => void;

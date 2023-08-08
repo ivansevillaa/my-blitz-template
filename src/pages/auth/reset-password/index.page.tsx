@@ -17,7 +17,7 @@ import { useForm } from "@mantine/form";
 
 import Layout from "src/core/layouts/RootLayout";
 
-import resetPassword from "src/features/auth/mutations/resetPassword";
+import resetPassword from "src/pages/auth/mutations/resetPassword";
 
 const ResetPasswordPage: BlitzPage = () => {
   const router = useRouter();

@@ -4,7 +4,7 @@ import { resolver } from "@blitzjs/rpc";
 
 import db from "db";
 
-import { ResetPassword } from "../schemas";
+import { ResetPassword } from "../types";
 import login from "./login";
 
 export class ResetPasswordError extends Error {

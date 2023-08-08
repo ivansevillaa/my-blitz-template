@@ -5,8 +5,9 @@ import { useMutation, useQuery } from "@blitzjs/rpc";
 
 import { Button, Container, Text } from "@mantine/core";
 
-import logout from "src/features/auth/mutations/logout";
 import { useCurrentUser } from "src/features/users/hooks/useCurrentUser";
+
+import logout from "src/pages/auth/mutations/logout";
 
 const UserInfo = () => {
   const currentUser = useCurrentUser();

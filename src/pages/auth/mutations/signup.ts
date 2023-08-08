@@ -4,7 +4,7 @@ import { resolver } from "@blitzjs/rpc";
 import db from "db";
 import { Role } from "types";
 
-import { Signup } from "../schemas";
+import { Signup } from "../types";
 
 export default resolver.pipe(
   resolver.zod(Signup),

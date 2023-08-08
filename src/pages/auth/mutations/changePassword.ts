@@ -4,7 +4,7 @@ import { AuthenticationError, NotFoundError } from "blitz";
 
 import db from "db";
 
-import { ChangePassword } from "../schemas";
+import { ChangePassword } from "../types";
 import { authenticateUser } from "./login";
 
 export default resolver.pipe(

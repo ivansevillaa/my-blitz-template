@@ -4,7 +4,7 @@ import { resolver } from "@blitzjs/rpc";
 import db from "db";
 import { forgotPasswordMailer } from "mailers/forgotPasswordMailer";
 
-import { ForgotPassword } from "../schemas";
+import { ForgotPassword } from "../types";
 
 const RESET_PASSWORD_TOKEN_EXPIRATION_IN_HOURS = 4;
 

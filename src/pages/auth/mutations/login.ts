@@ -5,7 +5,7 @@ import { AuthenticationError } from "blitz";
 import db from "db";
 import { Role } from "types";
 
-import { Login } from "../schemas";
+import { Login } from "../types";
 
 export const authenticateUser = async (
   rawEmail: string,

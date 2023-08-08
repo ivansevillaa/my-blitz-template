@@ -6,7 +6,7 @@ import { useForm } from "@mantine/form";
 
 import Layout from "src/core/layouts/RootLayout";
 
-import forgotPassword from "src/features/auth/mutations/forgotPassword";
+import forgotPassword from "src/pages/auth/mutations/forgotPassword";
 
 const ForgotPasswordPage: BlitzPage = () => {
   const [forgotPasswordMutation, { isSuccess }] = useMutation(forgotPassword);

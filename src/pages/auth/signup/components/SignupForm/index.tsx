@@ -19,7 +19,7 @@ import { useForm } from "@mantine/form";
 
 import { GoogleIcon } from "src/core/components/SocialIcons/GoogleIcons";
 
-import signup from "src/features/auth/mutations/signup";
+import signup from "src/pages/auth/mutations/signup";
 
 type SignupFormProps = {
   onSuccess?: () => void;
