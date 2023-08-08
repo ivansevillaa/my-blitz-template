@@ -84,7 +84,6 @@ export const SignupForm = (props: SignupFormProps) => {
               withAsterisk
               {...form.getInputProps("password")}
             />
-            <Button type="submit">Register</Button>
           </Stack>
           <Group position="apart" mt="xl">
             <Anchor component={Link} color="dimmed" href={Routes.LoginPage()} size="xs">

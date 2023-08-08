@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import { Routes } from "@blitzjs/next";
-import { useMutation } from "@blitzjs/rpc";
+import { useMutation, useQuery } from "@blitzjs/rpc";
 
 import { Button, Container, Text } from "@mantine/core";
 
