@@ -40,8 +40,8 @@ const ForgotPasswordPage: BlitzPage = () => {
           <>
             <Title order={2}>Request Submitted</Title>
             <Text>
-              If your email is in our system, you will receive instructions to reset your password
-              shortly.
+              If your email is in our system, you will receive instructions to
+              reset your password shortly.
             </Text>
           </>
         ) : (

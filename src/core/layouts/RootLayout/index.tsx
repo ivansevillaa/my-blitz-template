@@ -17,10 +17,10 @@ import {
 } from "@mantine/core";
 import React, { Suspense } from "react";
 
-const RootLayout: BlitzLayout<{ title?: string; children?: React.ReactNode }> = ({
-  title,
-  children,
-}) => {
+const RootLayout: BlitzLayout<{
+  title?: string;
+  children?: React.ReactNode;
+}> = ({ title, children }) => {
   const year = new Date().getFullYear();
 
   return (

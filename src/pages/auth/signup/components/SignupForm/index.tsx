@@ -67,7 +67,11 @@ export const SignupForm = (props: SignupFormProps) => {
             Twitter
           </Button>
         </Group>
-        <Divider label="Or continue with email" labelPosition="center" my="lg" />
+        <Divider
+          label="Or continue with email"
+          labelPosition="center"
+          my="lg"
+        />
         <form onSubmit={form.onSubmit(handleSubmit)}>
           <Stack>
             <TextInput
@@ -86,7 +90,12 @@ export const SignupForm = (props: SignupFormProps) => {
             />
           </Stack>
           <Group position="apart" mt="xl">
-            <Anchor component={Link} color="dimmed" href={Routes.LoginPage()} size="xs">
+            <Anchor
+              component={Link}
+              color="dimmed"
+              href={Routes.LoginPage()}
+              size="xs"
+            >
               Already have an account? Login
             </Anchor>
             <Button type="submit" radius="xl">

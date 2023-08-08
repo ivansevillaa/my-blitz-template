@@ -26,7 +26,10 @@ export default function Blog() {
           return <List.Item key={post.slug}>{post.title}</List.Item>;
         })}
       </List>
-      <Button loading={isLoading} onClick={() => addPostMutation({ title: "New Post Title!!" })}>
+      <Button
+        loading={isLoading}
+        onClick={() => addPostMutation({ title: "New Post Title!!" })}
+      >
         Create post
       </Button>
     </Layout>

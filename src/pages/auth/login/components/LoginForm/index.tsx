@@ -49,7 +49,9 @@ export const LoginForm = (props: LoginFormProps) => {
         return { errors: "Sorry, those credentials are invalid" };
       } else {
         return {
-          errors: "Sorry, we had an unexpected error. Please try again. - " + error.toString(),
+          errors:
+            "Sorry, we had an unexpected error. Please try again. - " +
+            error.toString(),
         };
       }
     }
@@ -73,7 +75,11 @@ export const LoginForm = (props: LoginFormProps) => {
             Twitter
           </Button>
         </Group>
-        <Divider label="Or continue with email" labelPosition="center" my="lg" />
+        <Divider
+          label="Or continue with email"
+          labelPosition="center"
+          my="lg"
+        />
         <form onSubmit={form.onSubmit(handleSubmit)}>
           <Stack>
             <TextInput
@@ -94,7 +100,12 @@ export const LoginForm = (props: LoginFormProps) => {
             />
           </Stack>
           <Group position="apart" mt="xl">
-            <Anchor component={Link} color="dimmed" href={Routes.SignupPage()} size="xs">
+            <Anchor
+              component={Link}
+              color="dimmed"
+              href={Routes.SignupPage()}
+              size="xs"
+            >
               {"Don't have an account? Register"}
             </Anchor>
             <Button type="submit" radius="xl">

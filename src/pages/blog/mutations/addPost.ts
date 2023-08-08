@@ -6,11 +6,15 @@ const Input = z.object({
   title: z.string(),
 });
 
-export default resolver.pipe(resolver.zod(Input), resolver.authorize(), async ({ title }) => {
-  console.log(`creating ${title}`);
-  return {
-    data: {
-      message: `Post ${title} created successfully`,
-    },
-  };
-});
+export default resolver.pipe(
+  resolver.zod(Input),
+  resolver.authorize(),
+  async ({ title }) => {
+    console.log(`creating ${title}`);
+    return {
+      data: {
+        message: `Post ${title} created successfully`,
+      },
+    };
+  }
+);

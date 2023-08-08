@@ -20,7 +20,9 @@ function MyApp({ Component, pageProps }: AppProps) {
     >
       <ErrorBoundary FallbackComponent={RootErrorFallback}>
         <Notifications position="top-center" />
-        <Suspense fallback={<Loader />}>{getLayout(<Component {...pageProps} />)}</Suspense>
+        <Suspense fallback={<Loader />}>
+          {getLayout(<Component {...pageProps} />)}
+        </Suspense>
       </ErrorBoundary>
     </MantineProvider>
   );

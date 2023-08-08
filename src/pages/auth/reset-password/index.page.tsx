@@ -5,7 +5,14 @@ import { BlitzPage, Routes } from "@blitzjs/next";
 import { useMutation } from "@blitzjs/rpc";
 import { assert } from "blitz";
 
-import { Anchor, Button, Container, PasswordInput, Text, Title } from "@mantine/core";
+import {
+  Anchor,
+  Button,
+  Container,
+  PasswordInput,
+  Text,
+  Title,
+} from "@mantine/core";
 import { useForm } from "@mantine/form";
 
 import Layout from "src/core/layouts/RootLayout";
@@ -79,6 +86,8 @@ const ResetPasswordPage: BlitzPage = () => {
 };
 
 ResetPasswordPage.redirectAuthenticatedTo = "/";
-ResetPasswordPage.getLayout = (page) => <Layout title="Reset Your Password">{page}</Layout>;
+ResetPasswordPage.getLayout = (page) => (
+  <Layout title="Reset Your Password">{page}</Layout>
+);
 
 export default ResetPasswordPage;

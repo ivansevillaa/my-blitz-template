@@ -102,7 +102,10 @@ export const mockRouter: NextRouter = {
 
 type DefaultParams = Parameters<typeof defaultRender>;
 type RenderUI = DefaultParams[0];
-type RenderOptions = DefaultParams[1] & { router?: Partial<NextRouter>; dehydratedState?: unknown };
+type RenderOptions = DefaultParams[1] & {
+  router?: Partial<NextRouter>;
+  dehydratedState?: unknown;
+};
 
 type DefaultHookParams = Parameters<typeof defaultRenderHook>;
 type RenderHook = DefaultHookParams[0];

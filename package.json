@@ -19,7 +19,7 @@
     "schema": "db/schema.prisma"
   },
   "prettier": {
-    "printWidth": 100,
+    "printWidth": 80,
     "importOrder": [
       "^(next/(.*)$)|^(next$)",
       "^(blitz/(.*)$)|^(blitz$)|^(@blitzjs/(.*)$)|^(@blitzjs$)",
