@@ -1,5 +1,6 @@
 import { resolver } from "@blitzjs/rpc";
 
+import db from "db";
 import { z } from "zod";
 
 const Input = z.object({
@@ -9,12 +10,14 @@ const Input = z.object({
 export default resolver.pipe(
   resolver.zod(Input),
   resolver.authorize(),
-  async ({ slug }) => {
-    console.log("slug", slug);
-    const post = {
-      title: `Blog Post #${slug}`,
-      slug: `${slug}`,
-    };
+  async ({ slug }, ctx) => {
+    const post = db.post.findFirstOrThrow({
+      where: {
+        authorId: ctx.session.userId,
+        slug,
+      },
+    });
+
     return post;
   }
 );

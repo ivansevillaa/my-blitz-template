@@ -1,6 +1,7 @@
 import { useMutation, useQuery } from "@blitzjs/rpc";
 
-import { Button, List } from "@mantine/core";
+import { Button, List, TextInput } from "@mantine/core";
+import { useForm } from "@mantine/form";
 import { notifications } from "@mantine/notifications";
 
 import Layout from "src/core/layouts/RootLayout";
@@ -14,24 +15,55 @@ export default function Blog() {
     onSuccess: (response) => {
       notifications.show({
         title: "Post created",
-        message: response.data.message,
+        message: `Post ${response.title} created successfully`,
       });
+    },
+  });
+
+  const form = useForm({
+    initialValues: {
+      title: "",
+      slug: "",
+      content: "",
     },
   });
 
   return (
     <Layout title="Blog">
+      <form onSubmit={form.onSubmit((values) => addPostMutation(values))}>
+        <TextInput
+          name="title"
+          label="Title"
+          placeholder="Title"
+          radius="md"
+          withAsterisk
+          {...form.getInputProps("title")}
+        />
+        <TextInput
+          name="slug"
+          label="Slug"
+          placeholder="Slug"
+          radius="md"
+          withAsterisk
+          {...form.getInputProps("slug")}
+        />
+        <TextInput
+          name="content"
+          label="Content"
+          placeholder="Content"
+          radius="md"
+          withAsterisk
+          {...form.getInputProps("content")}
+        />
+        <Button loading={isLoading} type="submit">
+          Create post
+        </Button>
+      </form>
       <List>
         {posts.map((post) => {
           return <List.Item key={post.slug}>{post.title}</List.Item>;
         })}
       </List>
-      <Button
-        loading={isLoading}
-        onClick={() => addPostMutation({ title: "New Post Title!!" })}
-      >
-        Create post
-      </Button>
     </Layout>
   );
 }

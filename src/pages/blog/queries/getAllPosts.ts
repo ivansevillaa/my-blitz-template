@@ -1,20 +1,13 @@
 import { resolver } from "@blitzjs/rpc";
 
-export default resolver.pipe(resolver.authorize(), async () => {
-  const posts = [
-    {
-      title: "Blog Post #1",
-      slug: "post1",
+import db from "db";
+
+export default resolver.pipe(resolver.authorize(), async (_, ctx) => {
+  const posts = await db.post.findMany({
+    where: {
+      authorId: ctx.session.userId,
     },
-    {
-      title: "Blog Post #2",
-      slug: "post2",
-    },
-    {
-      title: "Blog Post #3",
-      slug: "post3",
-    },
-  ];
+  });
 
   return posts;
 });

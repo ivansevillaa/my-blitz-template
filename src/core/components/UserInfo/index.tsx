@@ -23,6 +23,9 @@ const UserInfo = () => {
         >
           Logout
         </Button>
+        <Button component={Link} href={Routes.Blog()}>
+          Blog
+        </Button>
         <Container>
           <Text>
             User id: <code>{currentUser.id}</code>
