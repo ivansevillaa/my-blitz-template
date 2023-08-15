@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "blitz dev",
     "build": "blitz build",
-    "vercel-build": "npm run blitz prisma generate && npm run blitz prisma migrate deploy && npm run blitz build",
+    "vercel-build": "NODE_ENV=production blitz build && blitz prisma migrate deploy",
     "start": "blitz start",
     "db:studio": "blitz prisma studio",
     "db:migrate": "blitz prisma migrate dev",
