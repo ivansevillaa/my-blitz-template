@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "@blitzjs/rpc";
+import { getQueryClient, useMutation, useQuery } from "@blitzjs/rpc";
 
 import { Button, List, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
@@ -12,11 +12,14 @@ import getAllPosts from "./queries/getAllPosts";
 export default function Blog() {
   const [posts] = useQuery(getAllPosts, {});
   const [addPostMutation, { isLoading }] = useMutation(addPost, {
-    onSuccess: (response) => {
+    onSuccess: async (response) => {
       notifications.show({
         title: "Post created",
         message: `Post ${response.title} created successfully`,
       });
+
+      const queryClient = getQueryClient();
+      await queryClient.invalidateQueries();
     },
   });
 
