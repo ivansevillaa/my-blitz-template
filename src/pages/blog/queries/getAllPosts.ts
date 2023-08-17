@@ -7,6 +7,10 @@ export default resolver.pipe(resolver.authorize(), async (_, ctx) => {
     where: {
       authorId: ctx.session.userId,
     },
+    select: {
+      title: true,
+      slug: true,
+    },
   });
 
   return posts;

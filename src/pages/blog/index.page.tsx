@@ -1,11 +1,12 @@
 import { getQueryClient, useMutation, useQuery } from "@blitzjs/rpc";
 
-import { Button, List, TextInput } from "@mantine/core";
+import { Button, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { notifications } from "@mantine/notifications";
 
 import Layout from "src/core/layouts/RootLayout";
 
+import BlogList from "./components/BlogList";
 import addPost from "./mutations/addPost";
 import getAllPosts from "./queries/getAllPosts";
 
@@ -62,11 +63,7 @@ export default function Blog() {
           Create post
         </Button>
       </form>
-      <List>
-        {posts.map((post) => {
-          return <List.Item key={post.slug}>{post.title}</List.Item>;
-        })}
-      </List>
+      <BlogList posts={posts} />
     </Layout>
   );
 }
