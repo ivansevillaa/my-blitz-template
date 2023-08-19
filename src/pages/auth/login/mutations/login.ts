@@ -1,17 +1,16 @@
 import { SecurePassword } from "@blitzjs/auth/secure-password";
 import { resolver } from "@blitzjs/rpc";
 import { AuthenticationError } from "blitz";
-
 import db from "db";
 import { Role } from "types";
 
-import { Login } from "../types";
+import { LoginInput } from "../types";
 
 export const authenticateUser = async (
   rawEmail: string,
   rawPassword: string
 ) => {
-  const { email, password } = Login.parse({
+  const { email, password } = LoginInput.parse({
     email: rawEmail,
     password: rawPassword,
   });
@@ -34,7 +33,7 @@ export const authenticateUser = async (
 };
 
 export default resolver.pipe(
-  resolver.zod(Login),
+  resolver.zod(LoginInput),
   async ({ email, password }, ctx) => {
     // This throws an error if credentials are invalid
     const user = await authenticateUser(email, password);

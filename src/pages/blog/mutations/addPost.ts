@@ -1,5 +1,4 @@
 import { resolver } from "@blitzjs/rpc";
-
 import db from "db";
 import { z } from "zod";
 

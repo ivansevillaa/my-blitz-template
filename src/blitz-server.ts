@@ -2,7 +2,6 @@ import { AuthServerPlugin, PrismaStorage } from "@blitzjs/auth";
 import { simpleRolesIsAuthorized } from "@blitzjs/auth";
 import { setupBlitzServer } from "@blitzjs/next";
 import { BlitzLogger } from "blitz";
-
 import db from "db";
 
 import { authConfig } from "./blitz-client";

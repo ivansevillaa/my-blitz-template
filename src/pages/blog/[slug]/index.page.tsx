@@ -1,6 +1,5 @@
 import { useParam } from "@blitzjs/next";
 import { useQuery } from "@blitzjs/rpc";
-
 import { Text } from "@mantine/core";
 
 import Layout from "src/core/layouts/RootLayout";

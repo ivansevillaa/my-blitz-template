@@ -1,6 +1,5 @@
-import { useRouter } from "next/router";
-
 import { BlitzPage, Routes } from "@blitzjs/next";
+import { useRouter } from "next/router";
 
 import Layout from "src/core/layouts/RootLayout";
 

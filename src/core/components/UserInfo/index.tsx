@@ -1,12 +1,9 @@
-import Link from "next/link";
-
 import { Routes } from "@blitzjs/next";
 import { useMutation, useQuery } from "@blitzjs/rpc";
-
 import { Button, Container, Text } from "@mantine/core";
+import Link from "next/link";
 
 import { useCurrentUser } from "src/features/users/hooks/useCurrentUser";
-
 import logout from "src/pages/auth/mutations/logout";
 
 const UserInfo = () => {

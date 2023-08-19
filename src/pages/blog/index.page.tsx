@@ -1,5 +1,5 @@
+import { BlitzPage, Routes } from "@blitzjs/next";
 import { getQueryClient, useMutation, useQuery } from "@blitzjs/rpc";
-
 import { Button, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { notifications } from "@mantine/notifications";
@@ -10,7 +10,7 @@ import BlogList from "./components/BlogList";
 import addPost from "./mutations/addPost";
 import getAllPosts from "./queries/getAllPosts";
 
-export default function Blog() {
+const Blog: BlitzPage = () => {
   const [posts] = useQuery(getAllPosts, {});
   const [addPostMutation, { isLoading }] = useMutation(addPost, {
     onSuccess: async (response) => {
@@ -66,4 +66,6 @@ export default function Blog() {
       <BlogList posts={posts} />
     </Layout>
   );
-}
+};
+
+export default Blog;

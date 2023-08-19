@@ -23,12 +23,8 @@
   "prettier": {
     "printWidth": 80,
     "importOrder": [
-      "^(next/(.*)$)|^(next$)",
-      "^(blitz/(.*)$)|^(blitz$)|^(@blitzjs/(.*)$)|^(@blitzjs$)",
       "<THIRD_PARTY_MODULES>",
-      "^src/core(.*)$",
-      "^src/features(.*)$",
-      "^src/pages(.*)$",
+      "^src/(.*)$",
       "^[./]"
     ],
     "importOrderSeparation": true,

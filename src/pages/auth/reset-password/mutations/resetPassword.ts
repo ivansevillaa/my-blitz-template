@@ -1,11 +1,10 @@
 import { hash256 } from "@blitzjs/auth";
 import { SecurePassword } from "@blitzjs/auth/secure-password";
 import { resolver } from "@blitzjs/rpc";
-
 import db from "db";
 
-import { ResetPassword } from "../types";
-import login from "./login";
+import login from "../../login/mutations/login";
+import { ResetPasswordInput } from "../types";
 
 export class ResetPasswordError extends Error {
   name = "ResetPasswordError";
@@ -13,7 +12,7 @@ export class ResetPasswordError extends Error {
 }
 
 export default resolver.pipe(
-  resolver.zod(ResetPassword),
+  resolver.zod(ResetPasswordInput),
   async ({ password, token }, ctx) => {
     // 1. Try to find this token in the database
     const hashedToken = hash256(token);

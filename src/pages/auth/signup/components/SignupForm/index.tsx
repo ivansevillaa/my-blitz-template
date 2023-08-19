@@ -1,8 +1,5 @@
-import Link from "next/link";
-
 import { Routes } from "@blitzjs/next";
 import { useMutation } from "@blitzjs/rpc";
-
 import {
   Anchor,
   Button,
@@ -15,38 +12,29 @@ import {
   TextInput,
 } from "@mantine/core";
 import { TwitterIcon } from "@mantine/ds";
-import { useForm } from "@mantine/form";
+import { useForm, zodResolver } from "@mantine/form";
+import Link from "next/link";
 
 import { GoogleIcon } from "src/core/components/SocialIcons/GoogleIcons";
+import signup from "src/pages/auth/signup/mutations/signup";
 
-import signup from "src/pages/auth/mutations/signup";
+import { SignupFormType, SignupInput } from "../../types";
 
 type SignupFormProps = {
   onSuccess?: () => void;
 };
 
-export const SignupForm = (props: SignupFormProps) => {
+export const SignupForm = ({ onSuccess }: SignupFormProps) => {
   const [signupMutation] = useMutation(signup);
 
-  const form = useForm({
-    initialValues: {
-      email: "",
-      password: "",
-    },
+  const form = useForm<SignupFormType>({
+    validate: zodResolver(SignupInput),
+    validateInputOnBlur: true,
   });
 
-  const handleSubmit = async (values) => {
-    try {
-      await signupMutation(values);
-      props.onSuccess?.();
-    } catch (error: any) {
-      if (error.code === "P2002" && error.meta?.target?.includes("email")) {
-        // This error comes from Prisma
-        return { email: "This email is already being used" };
-      } else {
-        return { errorMessage: error.toString() };
-      }
-    }
+  const handleSubmit = async (values: SignupFormType) => {
+    await signupMutation(values);
+    onSuccess?.();
   };
 
   return (
@@ -98,7 +86,7 @@ export const SignupForm = (props: SignupFormProps) => {
             >
               Already have an account? Login
             </Anchor>
-            <Button type="submit" radius="xl">
+            <Button disabled={!form.isValid()} type="submit" radius="xl">
               Register
             </Button>
           </Group>

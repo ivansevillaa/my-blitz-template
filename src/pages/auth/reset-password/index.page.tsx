@@ -1,10 +1,5 @@
-import Link from "next/link";
-import { useRouter } from "next/router";
-
 import { BlitzPage, Routes } from "@blitzjs/next";
 import { useMutation } from "@blitzjs/rpc";
-import { assert } from "blitz";
-
 import {
   Anchor,
   Button,
@@ -13,39 +8,29 @@ import {
   Text,
   Title,
 } from "@mantine/core";
-import { useForm } from "@mantine/form";
+import { useForm, zodResolver } from "@mantine/form";
+import { assert } from "blitz";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 import Layout from "src/core/layouts/RootLayout";
+import resetPassword from "src/pages/auth/reset-password/mutations/resetPassword";
 
-import resetPassword from "src/pages/auth/mutations/resetPassword";
+import { ResetPasswordFormType, ResetPasswordInput } from "./types";
 
 const ResetPasswordPage: BlitzPage = () => {
   const router = useRouter();
   const token = router.query.token?.toString();
   const [resetPasswordMutation, { isSuccess }] = useMutation(resetPassword);
 
-  const form = useForm({
-    initialValues: {
-      password: "",
-      passwordConfirmation: "",
-    },
+  const form = useForm<ResetPasswordFormType>({
+    validate: zodResolver(ResetPasswordInput),
+    validateInputOnBlur: true,
   });
 
-  const handleSubmit = async (values) => {
-    try {
-      assert(token, "token is required.");
-      await resetPasswordMutation({ ...values, token });
-    } catch (error: any) {
-      if (error.name === "ResetPasswordError") {
-        return {
-          errorMessage: error.message,
-        };
-      } else {
-        return {
-          errorMessage: "Sorry, we had an unexpected error. Please try again.",
-        };
-      }
-    }
+  const handleSubmit = async (values: ResetPasswordFormType) => {
+    assert(token, "token is required.");
+    await resetPasswordMutation({ ...values, token });
   };
 
   return (

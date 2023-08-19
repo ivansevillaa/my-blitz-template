@@ -1,15 +1,14 @@
 import { generateToken, hash256 } from "@blitzjs/auth";
 import { resolver } from "@blitzjs/rpc";
-
 import db from "db";
 import { forgotPasswordMailer } from "mailers/forgotPasswordMailer";
 
-import { ForgotPassword } from "../types";
+import { ForgotPasswordInput } from "../types";
 
 const RESET_PASSWORD_TOKEN_EXPIRATION_IN_HOURS = 4;
 
 export default resolver.pipe(
-  resolver.zod(ForgotPassword),
+  resolver.zod(ForgotPasswordInput),
   async ({ email }) => {
     // 1. Get the user
     const user = await db.user.findFirst({

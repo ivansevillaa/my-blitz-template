@@ -1,34 +1,23 @@
 import { BlitzPage } from "@blitzjs/next";
 import { useMutation } from "@blitzjs/rpc";
-
 import { Button, Container, Text, TextInput, Title } from "@mantine/core";
-import { useForm } from "@mantine/form";
+import { useForm, zodResolver } from "@mantine/form";
 
 import Layout from "src/core/layouts/RootLayout";
+import forgotPassword from "src/pages/auth/forgot-password/mutations/forgotPassword";
 
-import forgotPassword from "src/pages/auth/mutations/forgotPassword";
+import { ForgotPasswordFormType, ForgotPasswordInput } from "./types";
 
 const ForgotPasswordPage: BlitzPage = () => {
   const [forgotPasswordMutation, { isSuccess }] = useMutation(forgotPassword);
 
-  const form = useForm({
-    initialValues: {
-      email: "",
-    },
-
-    validate: {
-      email: (value) => (/^\S+@\S+$/.test(value) ? null : "Invalid email"),
-    },
+  const form = useForm<ForgotPasswordFormType>({
+    validate: zodResolver(ForgotPasswordInput),
+    validateInputOnBlur: true,
   });
 
-  const handleSubmit = async (values) => {
-    try {
-      await forgotPasswordMutation(values);
-    } catch (error: any) {
-      return {
-        errorMessage: "Sorry, we had an unexpected error. Please try again.",
-      };
-    }
+  const handleSubmit = async (values: ForgotPasswordFormType) => {
+    await forgotPasswordMutation(values);
   };
 
   return (

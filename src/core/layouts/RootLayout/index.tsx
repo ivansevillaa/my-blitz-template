@@ -1,26 +1,27 @@
-import Head from "next/head";
-import Link from "next/link";
-
-import { BlitzLayout, Routes } from "@blitzjs/next";
-
+import { BlitzLayout, ErrorBoundary, Routes } from "@blitzjs/next";
+import { useMutation } from "@blitzjs/rpc";
 import {
   Anchor,
   AppShell,
-  Container,
+  Button,
   Footer,
   Group,
   Header,
-  List,
   Loader,
-  Stack,
   Text,
 } from "@mantine/core";
+import Head from "next/head";
+import Link from "next/link";
 import React, { Suspense } from "react";
+
+import RootErrorFallback from "src/core/components/RootErrorFallback";
+import logout from "src/pages/auth/mutations/logout";
 
 const RootLayout: BlitzLayout<{
   title?: string;
   children?: React.ReactNode;
 }> = ({ title, children }) => {
+  const [logoutMutation] = useMutation(logout);
   const year = new Date().getFullYear();
 
   return (
@@ -32,11 +33,18 @@ const RootLayout: BlitzLayout<{
 
       <AppShell
         header={
-          <Header height={60}>
-            <Group h="100%" p="lg">
+          <Header height={80}>
+            <Group h="100%" p="lg" sx={{ justifyContent: "space-between" }}>
               <Anchor href={Routes.Home()} component={Link} underline={false}>
                 Logo
               </Anchor>
+              <Button
+                onClick={async () => {
+                  await logoutMutation();
+                }}
+              >
+                Logout
+              </Button>
             </Group>
           </Header>
         }
@@ -48,7 +56,9 @@ const RootLayout: BlitzLayout<{
           </Footer>
         }
       >
-        <Suspense fallback={<Loader />}>{children}</Suspense>
+        <ErrorBoundary FallbackComponent={RootErrorFallback}>
+          <Suspense fallback={<Loader />}>{children}</Suspense>
+        </ErrorBoundary>
       </AppShell>
     </>
   );

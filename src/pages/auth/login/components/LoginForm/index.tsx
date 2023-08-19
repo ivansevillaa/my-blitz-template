@@ -1,9 +1,5 @@
-import Link from "next/link";
-
 import { Routes } from "@blitzjs/next";
 import { useMutation } from "@blitzjs/rpc";
-import { AuthenticationError, PromiseReturnType } from "blitz";
-
 import {
   Anchor,
   Button,
@@ -16,45 +12,30 @@ import {
   TextInput,
 } from "@mantine/core";
 import { TwitterIcon } from "@mantine/ds";
-import { useForm } from "@mantine/form";
+import { useForm, zodResolver } from "@mantine/form";
+import { PromiseReturnType } from "blitz";
+import Link from "next/link";
 
 import { GoogleIcon } from "src/core/components/SocialIcons/GoogleIcons";
+import login from "src/pages/auth/login/mutations/login";
 
-import login from "src/pages/auth/mutations/login";
+import { LoginFormType, LoginInput } from "../../types";
 
 type LoginFormProps = {
   onSuccess?: (user: PromiseReturnType<typeof login>) => void;
 };
 
-export const LoginForm = (props: LoginFormProps) => {
+export const LoginForm = ({ onSuccess }: LoginFormProps) => {
   const [loginMutation] = useMutation(login);
 
-  const form = useForm({
-    initialValues: {
-      email: "",
-      password: "",
-    },
-
-    validate: {
-      email: (value) => (/^\S+@\S+$/.test(value) ? null : "Invalid email"),
-    },
+  const form = useForm<LoginFormType>({
+    validate: zodResolver(LoginInput),
+    validateInputOnBlur: true,
   });
 
-  const handleSubmit = async (values) => {
-    try {
-      const user = await loginMutation(values);
-      props.onSuccess?.(user);
-    } catch (error: any) {
-      if (error instanceof AuthenticationError) {
-        return { errors: "Sorry, those credentials are invalid" };
-      } else {
-        return {
-          errors:
-            "Sorry, we had an unexpected error. Please try again. - " +
-            error.toString(),
-        };
-      }
-    }
+  const handleSubmit = async (values: LoginFormType) => {
+    const user = await loginMutation(values);
+    onSuccess?.(user);
   };
 
   return (

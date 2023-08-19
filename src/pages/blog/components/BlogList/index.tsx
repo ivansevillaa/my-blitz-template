@@ -1,6 +1,5 @@
-import { PromiseReturnType } from "blitz";
-
 import { List } from "@mantine/core";
+import { PromiseReturnType } from "blitz";
 
 import getAllPosts from "../../queries/getAllPosts";
 
