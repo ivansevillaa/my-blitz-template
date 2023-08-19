@@ -3,6 +3,7 @@ import { useMutation } from "@blitzjs/rpc";
 import {
   Anchor,
   Button,
+  Checkbox,
   Divider,
   Group,
   Paper,
@@ -30,6 +31,7 @@ export const SignupForm = ({ onSuccess }: SignupFormProps) => {
   const form = useForm<SignupFormType>({
     validate: zodResolver(SignupInput),
     validateInputOnBlur: true,
+    validateInputOnChange: ["terms"],
   });
 
   const handleSubmit = async (values: SignupFormType) => {
@@ -75,6 +77,11 @@ export const SignupForm = ({ onSuccess }: SignupFormProps) => {
               placeholder="Password"
               withAsterisk
               {...form.getInputProps("password")}
+            />
+            <Checkbox
+              name="terms"
+              label="I agree to sell my privacy"
+              {...form.getInputProps("terms", { type: "checkbox" })}
             />
           </Stack>
           <Group position="apart" mt="xl">
