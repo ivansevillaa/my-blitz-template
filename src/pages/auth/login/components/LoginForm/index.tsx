@@ -89,7 +89,7 @@ export const LoginForm = ({ onSuccess }: LoginFormProps) => {
             >
               {"Don't have an account? Register"}
             </Anchor>
-            <Button type="submit" radius="xl">
+            <Button disabled={!form.isValid()} type="submit" radius="xl">
               Login
             </Button>
           </Group>
