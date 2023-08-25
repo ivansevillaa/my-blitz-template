@@ -1,6 +1,9 @@
 import { SecurePassword } from "@blitzjs/auth/secure-password";
 import { resolver } from "@blitzjs/rpc";
 import db from "db";
+import WelcomeEmail from "mailers/react-email/emails/Welcome";
+import { sendEmail } from "mailers/sendEmail";
+import React from "react";
 import { Role } from "types";
 
 import { SignupInput } from "../types";
@@ -12,6 +15,12 @@ export default resolver.pipe(
     const user = await db.user.create({
       data: { email: email.toLowerCase().trim(), hashedPassword, role: "USER" },
       select: { id: true, name: true, email: true, role: true },
+    });
+
+    await sendEmail({
+      to: user.email,
+      subject: "Welcome!!",
+      react: React.createElement(WelcomeEmail),
     });
 
     await ctx.session.$create({ userId: user.id, role: user.role as Role });
