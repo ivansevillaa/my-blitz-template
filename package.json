@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "blitz dev",
     "build": "blitz build",
-    "vercel-build": "NODE_ENV=production npm run email:install-dependencies && blitz build && blitz prisma migrate deploy",
+    "vercel-build": "NODE_ENV=production npm run email:install-dependencies && blitz prisma migrate deploy && blitz build",
     "start": "blitz start",
     "email:dev": "cd mailers/react-email && npm run dev --port 3001",
     "email:install-dependencies": "cd mailers/react-email && npm install",
