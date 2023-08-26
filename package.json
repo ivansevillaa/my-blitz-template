@@ -4,9 +4,10 @@
   "scripts": {
     "dev": "blitz dev",
     "build": "blitz build",
-    "vercel-build": "NODE_ENV=production blitz build && blitz prisma migrate deploy",
+    "vercel-build": "NODE_ENV=production blitz build && blitz prisma migrate deploy && email:install-dependencies",
     "start": "blitz start",
     "email:dev": "cd mailers/react-email && npm run dev --port 3001",
+    "email:install-dependencies": "cd mailers/react-email && npm install",
     "db:studio": "blitz prisma studio",
     "db:migrate": "blitz prisma migrate dev",
     "lint": "eslint --ignore-path .gitignore --ext .js,.ts,.tsx .",
