@@ -1,3 +1,4 @@
+import { TokenType } from "db";
 import { z } from "zod";
 
 export const email = z
@@ -15,3 +16,12 @@ export const ChangePassword = z.object({
   currentPassword: z.string(),
   newPassword: password,
 });
+
+export type SendVerifyEmailParams = {
+  userId: string;
+  userEmail: string;
+};
+
+export type GenerateTokenParams = SendVerifyEmailParams & {
+  tokenType: TokenType;
+};

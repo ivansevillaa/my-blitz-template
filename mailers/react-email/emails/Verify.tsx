@@ -20,7 +20,7 @@ const baseUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
   : "http://localhost:3000";
 
-const WelcomeEmail: React.FC<Props> = ({ verifyEmailUrl }) => {
+const VerifyEmail: React.FC<Props> = ({ verifyEmailUrl }) => {
   return (
     <Html>
       <Head />
@@ -38,17 +38,13 @@ const WelcomeEmail: React.FC<Props> = ({ verifyEmailUrl }) => {
             />
             <Hr style={hr} />
             <Text style={paragraph}>
-              Thanks for submitting your account information. You&apos;re now
-              ready to make live transactions with Stripe!
-            </Text>
-            <Text style={paragraph}>
-              You can view your payments and a variety of other information
-              about your account right from your dashboard.
+              Hello, you requested this email for verifying your account. If you
+              didn&apos;t requested, please ignore it.
             </Text>
             <Button pX={10} pY={10} style={button} href={verifyEmailUrl}>
               Click here to verify you account
             </Button>
-            <Text style={paragraph}>— The Stripe team</Text>
+            <Text style={paragraph}>— The Blitz team</Text>
             <Hr style={hr} />
             <Text style={footer}>
               Stripe, 354 Oyster Point Blvd, South San Francisco, CA 94080
@@ -60,7 +56,7 @@ const WelcomeEmail: React.FC<Props> = ({ verifyEmailUrl }) => {
   );
 };
 
-export default WelcomeEmail;
+export default VerifyEmail;
 
 const main = {
   backgroundColor: "#f6f9fc",

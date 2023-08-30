@@ -1,6 +1,7 @@
 import { BlitzLayout, ErrorBoundary, Routes } from "@blitzjs/next";
 import { useMutation } from "@blitzjs/rpc";
 import {
+  Alert,
   Anchor,
   AppShell,
   Button,
@@ -10,19 +11,28 @@ import {
   Loader,
   Text,
 } from "@mantine/core";
+import { IconAlertCircle } from "@tabler/icons-react";
 import Head from "next/head";
 import Link from "next/link";
 import React, { Suspense } from "react";
 
 import RootErrorFallback from "src/core/components/RootErrorFallback";
+import { useCurrentUser } from "src/features/users/hooks/useCurrentUser";
 import logout from "src/pages/auth/mutations/logout";
+import sendVerifyEmail from "src/pages/auth/verify-email/mutations/sendVerifyEmail";
 
 const RootLayout: BlitzLayout<{
   title?: string;
   children?: React.ReactNode;
 }> = ({ title, children }) => {
   const [logoutMutation] = useMutation(logout);
+  const [sendVerifyEmailMutation, { isLoading }] = useMutation(sendVerifyEmail);
   const year = new Date().getFullYear();
+  const currentUser = useCurrentUser();
+
+  const handleSendVerifyEmail = async () => {
+    await sendVerifyEmailMutation();
+  };
 
   return (
     <>
@@ -38,13 +48,15 @@ const RootLayout: BlitzLayout<{
               <Anchor href={Routes.Home()} component={Link} underline={false}>
                 Logo
               </Anchor>
-              <Button
-                onClick={async () => {
-                  await logoutMutation();
-                }}
-              >
-                Logout
-              </Button>
+              {currentUser && (
+                <Button
+                  onClick={async () => {
+                    await logoutMutation();
+                  }}
+                >
+                  Logout
+                </Button>
+              )}
             </Group>
           </Header>
         }
@@ -57,7 +69,31 @@ const RootLayout: BlitzLayout<{
         }
       >
         <ErrorBoundary FallbackComponent={RootErrorFallback}>
-          <Suspense fallback={<Loader />}>{children}</Suspense>
+          <Suspense fallback={<Loader />}>
+            {currentUser && !currentUser?.emailVerifiedAt && (
+              <Alert
+                icon={<IconAlertCircle size="1rem" />}
+                title="Warning!"
+                color="red"
+                mb="lg"
+              >
+                <Text>
+                  Your email is still not verified. Please check your inbox for
+                  the email welcome email we sent
+                </Text>
+                <Button
+                  color="red"
+                  size="xs"
+                  mt="xs"
+                  onClick={handleSendVerifyEmail}
+                  loading={isLoading}
+                >
+                  Resend email
+                </Button>
+              </Alert>
+            )}
+            {children}
+          </Suspense>
         </ErrorBoundary>
       </AppShell>
     </>

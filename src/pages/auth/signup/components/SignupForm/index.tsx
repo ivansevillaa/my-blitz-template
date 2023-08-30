@@ -26,7 +26,7 @@ type SignupFormProps = {
 };
 
 export const SignupForm = ({ onSuccess }: SignupFormProps) => {
-  const [signupMutation] = useMutation(signup);
+  const [signupMutation, { isLoading }] = useMutation(signup);
 
   const form = useForm<SignupFormType>({
     validate: zodResolver(SignupInput),
@@ -93,7 +93,12 @@ export const SignupForm = ({ onSuccess }: SignupFormProps) => {
             >
               Already have an account? Login
             </Anchor>
-            <Button disabled={!form.isValid()} type="submit" radius="xl">
+            <Button
+              loading={isLoading}
+              disabled={!form.isValid()}
+              type="submit"
+              radius="xl"
+            >
               Register
             </Button>
           </Group>

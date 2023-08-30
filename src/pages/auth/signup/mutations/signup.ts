@@ -6,6 +6,7 @@ import { sendEmail } from "mailers/sendEmail";
 import React from "react";
 import { Role } from "types";
 
+import { getEmailVerifyLink } from "../../utils";
 import { SignupInput } from "../types";
 
 export default resolver.pipe(
@@ -17,10 +18,17 @@ export default resolver.pipe(
       select: { id: true, name: true, email: true, role: true },
     });
 
+    const confirmEmailLink = await getEmailVerifyLink({
+      userId: user.id,
+      userEmail: user.email,
+    });
+
     await sendEmail({
       to: user.email,
       subject: "Welcome!!",
-      react: React.createElement(WelcomeEmail),
+      react: React.createElement(WelcomeEmail, {
+        verifyEmailUrl: confirmEmailLink,
+      }),
     });
 
     await ctx.session.$create({ userId: user.id, role: user.role as Role });
