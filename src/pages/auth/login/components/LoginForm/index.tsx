@@ -79,6 +79,15 @@ export const LoginForm = ({ onSuccess }: LoginFormProps) => {
               withAsterisk
               {...form.getInputProps("password")}
             />
+            <Anchor
+              component={Link}
+              color="dimmed"
+              href={Routes.ForgotPasswordPage()}
+              size="xs"
+              align="end"
+            >
+              {"Forgot your password?"}
+            </Anchor>
           </Stack>
           <Group position="apart" mt="xl">
             <Anchor

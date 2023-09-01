@@ -9,7 +9,8 @@ import forgotPassword from "src/pages/auth/forgot-password/mutations/forgotPassw
 import { ForgotPasswordFormType, ForgotPasswordInput } from "./types";
 
 const ForgotPasswordPage: BlitzPage = () => {
-  const [forgotPasswordMutation, { isSuccess }] = useMutation(forgotPassword);
+  const [forgotPasswordMutation, { isSuccess, isLoading }] =
+    useMutation(forgotPassword);
 
   const form = useForm<ForgotPasswordFormType>({
     validate: zodResolver(ForgotPasswordInput),
@@ -42,7 +43,9 @@ const ForgotPasswordPage: BlitzPage = () => {
               withAsterisk
               {...form.getInputProps("email")}
             />
-            <Button type="submit">Send Reset Password Instructions</Button>
+            <Button type="submit" mt="xs" loading={isLoading}>
+              Send Reset Password Instructions
+            </Button>
           </form>
         )}
       </Container>

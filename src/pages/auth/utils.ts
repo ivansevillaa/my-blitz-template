@@ -33,7 +33,7 @@ async function createToken({
   return token;
 }
 
-async function regenerateToken({
+export async function regenerateToken({
   userId,
   userEmail,
   tokenType,

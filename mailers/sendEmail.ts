@@ -8,7 +8,15 @@ import { nodemailerAppTransport } from "./transports/nodemailerLocalTransport";
 
 const resend = new Resend(env.RESEND_API_KEY);
 
-export async function sendEmail({ to, subject, react }) {
+export async function sendEmail({
+  to,
+  subject,
+  react,
+}: {
+  to: string;
+  subject: string;
+  react: any;
+}) {
   const message = {
     from: "onboarding@resend.dev",
     to,

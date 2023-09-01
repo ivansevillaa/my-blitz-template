@@ -1,7 +1,7 @@
 import { hash256 } from "@blitzjs/auth";
 import { SecurePassword } from "@blitzjs/auth/secure-password";
 import { resolver } from "@blitzjs/rpc";
-import db from "db";
+import db, { TokenType } from "db";
 
 import login from "../../login/mutations/login";
 import { ResetPasswordInput } from "../types";
@@ -17,7 +17,7 @@ export default resolver.pipe(
     // 1. Try to find this token in the database
     const hashedToken = hash256(token);
     const possibleToken = await db.token.findFirst({
-      where: { hashedToken, type: "RESET_PASSWORD" },
+      where: { hashedToken, type: TokenType.RESET_PASSWORD },
       include: { user: true },
     });
 
@@ -47,7 +47,5 @@ export default resolver.pipe(
 
     // 7. Now log the user in with the new credentials
     await login({ email: user.email, password }, ctx);
-
-    return true;
   }
 );

@@ -9,7 +9,6 @@ import {
   Title,
 } from "@mantine/core";
 import { useForm, zodResolver } from "@mantine/form";
-import { assert } from "blitz";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
@@ -19,19 +18,40 @@ import resetPassword from "src/pages/auth/reset-password/mutations/resetPassword
 import { ResetPasswordFormType, ResetPasswordInput } from "./types";
 
 const ResetPasswordPage: BlitzPage = () => {
-  const router = useRouter();
-  const token = router.query.token?.toString();
-  const [resetPasswordMutation, { isSuccess }] = useMutation(resetPassword);
+  const { query } = useRouter();
+  const [resetPasswordMutation, { isSuccess, isLoading }] =
+    useMutation(resetPassword);
 
   const form = useForm<ResetPasswordFormType>({
+    initialValues: {
+      password: "",
+      passwordConfirmation: "",
+      token: "",
+    },
     validate: zodResolver(ResetPasswordInput),
     validateInputOnBlur: true,
   });
 
   const handleSubmit = async (values: ResetPasswordFormType) => {
-    assert(token, "token is required.");
-    await resetPasswordMutation({ ...values, token });
+    await resetPasswordMutation({
+      ...values,
+      token: typeof query.token === "string" ? query.token : "",
+    });
   };
+
+  if (!query.token) {
+    return (
+      <>
+        <Title order={2}>Token not valid</Title>
+        <Text>
+          Go to the{" "}
+          <Anchor component={Link} href={Routes.Home()}>
+            homepage
+          </Anchor>
+        </Text>
+      </>
+    );
+  }
 
   return (
     <Container>
@@ -63,7 +83,14 @@ const ResetPasswordPage: BlitzPage = () => {
             withAsterisk
             {...form.getInputProps("passwordConfirmation")}
           />
-          <Button type="submit">Reset Password</Button>
+          <Button
+            type="submit"
+            mt="xs"
+            loading={isLoading}
+            disabled={!form.isValid()}
+          >
+            Reset Password
+          </Button>
         </form>
       )}
     </Container>

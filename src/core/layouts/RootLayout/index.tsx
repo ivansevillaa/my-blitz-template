@@ -26,7 +26,8 @@ const RootLayout: BlitzLayout<{
   children?: React.ReactNode;
 }> = ({ title, children }) => {
   const [logoutMutation] = useMutation(logout);
-  const [sendVerifyEmailMutation, { isLoading }] = useMutation(sendVerifyEmail);
+  const [sendVerifyEmailMutation, { isLoading, isSuccess }] =
+    useMutation(sendVerifyEmail);
   const year = new Date().getFullYear();
   const currentUser = useCurrentUser();
 
@@ -73,23 +74,33 @@ const RootLayout: BlitzLayout<{
             {currentUser && !currentUser?.emailVerifiedAt && (
               <Alert
                 icon={<IconAlertCircle size="1rem" />}
-                title="Warning!"
+                title={isSuccess ? "Email sent!" : "Warning!"}
                 color="red"
                 mb="lg"
               >
-                <Text>
-                  Your email is still not verified. Please check your inbox for
-                  the email welcome email we sent
-                </Text>
-                <Button
-                  color="red"
-                  size="xs"
-                  mt="xs"
-                  onClick={handleSendVerifyEmail}
-                  loading={isLoading}
-                >
-                  Resend email
-                </Button>
+                {!isSuccess && (
+                  <>
+                    <Text>
+                      Your email is still not verified. Please check your inbox
+                      for the email welcome email we sent
+                    </Text>
+                    <Button
+                      color="red"
+                      size="xs"
+                      mt="xs"
+                      onClick={handleSendVerifyEmail}
+                      loading={isLoading}
+                    >
+                      Resend email
+                    </Button>
+                  </>
+                )}
+                {isSuccess && (
+                  <Text>
+                    The email has been sent and should arrive in the next few
+                    minutes. Please be patient and check your spam folder
+                  </Text>
+                )}
               </Alert>
             )}
             {children}
